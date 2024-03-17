@@ -1,28 +1,43 @@
-Deployment Creation
-This README file provides step-by-step instructions to perform various deployment operations using Kubernetes. The following practical questions are covered in this guide.
+Deployment Creation- we are using deployment because we are facing problem with replicaset to update and rollout .In case of 
+replicaset i we want to update version image it will delete all pod at same time then it occur application downtime and 
+application will not accessible to user untill pod created.we can not switch with new version to old version
 
-Video Link: https://youtu.be/-uO400iEuKo
+
 
 Question 1: Create a deployment named my-deploy with the image nginx.
 To create a deployment named "my-deploy" with the nginx image, use the following command:
-
 kubectl create deployment my-deploy --image=nginx
+
+To check deploy use command
+kubectl get all/kubectl get deploy(when we create deployment that time 3 things will create pod,replicaset,by default service account)
+kubectl get deploy -o wide
+If we want to check rollout history then we can use command 
+kubectl rollout history deploy podname(mydeploy)
+
 Question 2: Scale my-deploy to 3 replicas.
 To scale the "my-deploy" deployment to 3 replicas, use the following command:
 
 kubectl scale deployment my-deploy --replicas=3
+
 Question 3: Replace the image in my-deploy from nginx to nginx:alpine.
 To replace the image in the "my-deploy" deployment from "nginx" to "nginx:alpine", use the following command:
 
 kubectl set image deployment my-deploy nginx=nginx:alpine
+we can also use this one
+kubectl get deploy mydeploy -o yaml > mydeploy.yaml
+vim deploy.yaml[go to inside file and update image nginx to nginx:alpine]
+then apply using command
+kubectl apply -f podname.yaml
+kbectl get deploy -o wide
+
 Question 4: Scale down the replicas of my-deploy to 2.
 To scale down the replicas of the "my-deploy" deployment to 2, use the following command:
-
 kubectl scale deployment my-deploy --replicas=2
+
 Question 5: Rollback to the previous version of my-deploy.
 To rollback the "my-deploy" deployment to the previous version, use the following command:
-
 kubectl rollout undo deployment my-deploy
+
 Question 6: Delete the deployment, replicaset, and pod created by my-deploy.
 To delete the deployment, replicaset, and pods created by the "my-deploy" deployment, use the following command:
 
