@@ -1,5 +1,5 @@
 Deployment Creation- we are using deployment because we are facing problem with replicaset to update and rollout .In case of 
-replicaset i we want to update version image it will delete all pod at same time then it occur application downtime and 
+replicaset if   we want to update version image it will delete all pod at same time then it occur application downtime and 
 application will not accessible to user untill pod created.we can not switch with new version to old version
 
 
